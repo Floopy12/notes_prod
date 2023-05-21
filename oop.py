@@ -11,18 +11,16 @@ class Save:
     def save_text(self):
         text_val = self.text.get('1.0' , 'end')
         name_val = self.name.get('1.0', 'end')
-        print(text_val)
+        
         cur.execute(f'''
         INSERT INTO note (name, content) VALUES ('{name_val}', '{text_val}')
         ''')
+        
+
+        
         con.commit()
  
            
-
-
-       
-    
-
 
 class Delete:
     def __init__(self, name, text):
@@ -35,5 +33,5 @@ class Delete:
         # DELETE FROM note WHERE 
         # ''')
         con.commit()
-        print('Заметка удалена')
+        
 

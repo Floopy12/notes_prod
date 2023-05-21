@@ -33,6 +33,31 @@ label_allnotes = tk.Label(frame_aside, text = 'Ваши заметки', font = 
 label_allnotes.pack(pady = 8)
 
 
+def delete_note():
+    select = list_note.curselection()  #индекс выбраного элемента
+    name_note = list_note.get(select)   #имя заметки по индексу
+    cur.execute(f'DELETE FROM note WHERE name = "{name_note}"')
+    con.commit()
+    list_note.delete(select)
+
+
+def show_note():
+    select = list_note.curselection()
+    name_note = list_note.get(select)
+    text_note = cur.execute(f'SELECT content FROM note WHERE name = "{name_note}"').fetchone()
+    field_content.delete('1.0', END)
+    field_name.insert(1.0, name_note)
+    field_content.insert(1.0, text_note)
+   
+
+but_delete = tk.Button(frame_aside, text = 'Удалить заметку', command = delete_note)
+but_delete.pack(fill = X, side = BOTTOM )
+
+but_show = tk.Button(frame_aside, text = 'Открыть заметку', command = show_note)
+but_show.pack(fill = X)
+
+
+
     
 all = cur.execute('SELECT name FROM note WHERE rowid > 0').fetchall()
 all_var = Variable(value=all)
@@ -51,6 +76,7 @@ scroll = ttk.Scrollbar(frame_aside, orient = 'vertical', command = list_note.yvi
 scroll.pack(side = tk.LEFT, fill = tk.Y)
 
 list_note["yscrollcommand"] = scroll.set
+
 
 
 label_name = tk.Label(frame_fields, text = 'Имя заметки', font = 'Helvetica 10 bold', bg = '#c9efb7')
@@ -82,8 +108,8 @@ but_save.grid(row = 4, column = 0, sticky='e', pady = 8)
 
 delete_content = Delete(field_name, field_content)  # Удаляем заметку из бд
 
-but_delete = tk.Button(frame_fields, text = 'Удалить', command = delete_content.delete_text, width = 20)
-but_delete.grid(row = 4, column = 0, sticky='w', columnspan = 2, padx = 5)
+but_clear = tk.Button(frame_fields, text = 'Очистить', command = delete_content.delete_text, width = 20)
+but_clear.grid(row = 4, column = 0, sticky='w', columnspan = 2, padx = 5)
 
 
 
