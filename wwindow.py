@@ -30,7 +30,7 @@ frame_footer.grid(row = 1, column = 0, columnspan = 2,sticky='nswe')
 
 
 label_allnotes = tk.Label(frame_aside, text = 'Ваши заметки', font = 'Helvetica 10 bold', bg = '#c9efb7')
-label_allnotes.pack(pady = 8)
+label_allnotes.pack(pady = 12)
 
 
 def delete_note():
@@ -80,7 +80,7 @@ list_note["yscrollcommand"] = scroll.set
 
 
 label_name = tk.Label(frame_fields, text = 'Имя заметки', font = 'Helvetica 10 bold', bg = '#c9efb7')
-label_name.grid(row = 0, column = 0, pady = 8, columnspan = 2, sticky = 'w', padx = 30)
+label_name.grid(row = 0, column = 0, pady = 12, columnspan = 2, sticky = 'w', padx = 30)
 
 field_name = tk.Text(frame_fields,
                      width = 20,
@@ -92,7 +92,7 @@ field_name.grid(row = 0, column = 0, pady = 8, sticky = 'ns')
 
 field_content = tk.Text(frame_fields,
                         width = 60,
-                        height = 20, 
+                        height = 23, 
                         bg = '#d6f8f7',
                         font = 'Helvetica 11')
 field_content.grid(row = 3, column = 0, padx = 5)
